@@ -1466,6 +1466,65 @@ const options: RenovateOptions[] = [
     mergeable: true,
     cli: false,
   },
+
+  {
+    name: 'commodore',
+    description: 'Configuration object for Commodore language',
+    stage: 'package',
+    type: 'object',
+    default: {
+      managerBranchPrefix: 'commodore-',
+      fileMatch: ['^class\\/.*\\.yml$'],
+      pinDigests: true,
+    },
+    mergeable: true,
+    cli: false,
+  },
+  {
+    name: 'commodore-helm',
+    description: 'Configuration object for Commodore Helm dependencies.',
+    stage: 'package',
+    type: 'object',
+    default: {
+      commitMessageTopic: 'Helm chart {{depName}}',
+    },
+    mergeable: true,
+    cli: false,
+  },
+  {
+    name: 'commodore-docker',
+    description: 'Configuration object for Commodore Docker dependencies.',
+    stage: 'package',
+    type: 'object',
+    default: {
+      versioning: dockerVersioning.id,
+      commitMessageTopic: '{{{depName}}} Docker tag',
+      major: { enabled: false },
+      commitMessageExtra:
+        'to v{{#if isMajor}}{{{newMajor}}}{{else}}{{{newVersion}}}{{/if}}',
+      digest: {
+        branchTopic: '{{{depNameSanitized}}}-{{{currentValue}}}',
+        commitMessageExtra: 'to {{newDigestShort}}',
+        commitMessageTopic:
+          '{{{depName}}}{{#if currentValue}}:{{{currentValue}}}{{/if}} Docker digest',
+        group: {
+          commitMessageTopic: '{{{groupName}}}',
+          commitMessageExtra: '',
+        },
+      },
+      pin: {
+        commitMessageExtra: '',
+        groupName: 'Docker digests',
+        group: {
+          commitMessageTopic: '{{{groupName}}}',
+          branchTopic: 'digests-pin',
+        },
+      },
+    },
+    mergeable: true,
+    cli: false,
+  },
+
   {
     name: 'php',
     description: 'Configuration object for php',

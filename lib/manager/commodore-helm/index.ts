@@ -1,0 +1,5 @@
+import { LANGUAGE_COMMODORE } from '../../constants/languages';
+export { extractPackageFile } from './extract';
+export { updateDependency } from './update';
+
+export const language = LANGUAGE_COMMODORE;

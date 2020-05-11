@@ -52,6 +52,9 @@ const manualSourceUrls = {
   kubernetes: {
     node: 'https://github.com/nodejs/node',
   },
+  commodore: {
+    node: 'https://github.com/nodejs/node',
+  },
   npm: {
     node: 'https://github.com/nodejs/node',
   },
